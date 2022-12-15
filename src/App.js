@@ -82,7 +82,7 @@ function App() {
         <h2>Completed Tasks</h2>
         {toDos.map((element) => {
           if (element.status) {
-            return <h2>{element.task}</h2>;
+            return <h2 key={element.id}>{element.task}</h2>;
           } else {
             return null;
           }
@@ -96,7 +96,7 @@ function App() {
       <div style={{ paddingTop: 50 }}>
         <h2>Deleted Tasks</h2>
         {deleted.map((element) => {
-            return <h2>{element.task}</h2>;
+            return <h2 key={element.id}>{element.task}</h2>;
         })}
       </div>
     );
