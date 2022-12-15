@@ -50,7 +50,14 @@ function App() {
                 <p>{element.task}</p>
               </div>
               <div className="right">
-                <i className="fas fa-times"></i>
+                <i onClick={()=>
+                setTodos(toDos.filter((obj)=>{
+                  if(obj.id===element.id){
+                    return null
+                  }
+                  return obj
+                }))
+                } className="fas fa-times"></i>
               </div>
             </div>
           );
