@@ -3,6 +3,8 @@ import { useState } from "react";
 function App() {
   const [toDos, setTodos] = useState([]);
   const [task, setTask] = useState("");
+  const [deleted, setDeleted] = useState([]);
+
   return (
     <div className="app">
       <div className="mainHeading">
@@ -50,37 +52,54 @@ function App() {
                 <p>{element.task}</p>
               </div>
               <div className="right">
-                <i onClick={()=>
-                setTodos(toDos.filter((obj)=>{
-                  if(obj.id===element.id){
-                    return null
+                <i
+                  onClick={() =>
+                    setTodos(
+                      toDos.filter((obj) => {
+                        if (obj.id === element.id) {
+                          setDeleted([...deleted, obj]);
+                          return null;
+                        }
+                        return obj;
+                      })
+                    )
                   }
-                  return obj
-                }))
-                } className="fas fa-times"></i>
+                  className="fas fa-times"
+                ></i>
               </div>
             </div>
           );
         })}
       </div>
       <Completed />
+      <Removed />
     </div>
   );
 
   function Completed() {
-    return(
-    <div style={{ paddingTop:50}}>
-      <h2>Completed Tasks</h2>
-      {toDos.map((element) => {
-        if (element.status) {
-          return (<h2>{element.task}</h2>)
-        }
-        else{
-          return null
-        }
-      })}
-    </div>
-    )
+    return (
+      <div style={{ paddingTop: 50 }}>
+        <h2>Completed Tasks</h2>
+        {toDos.map((element) => {
+          if (element.status) {
+            return <h2>{element.task}</h2>;
+          } else {
+            return null;
+          }
+        })}
+      </div>
+    );
+  }
+
+  function Removed() {
+    return (
+      <div style={{ paddingTop: 50 }}>
+        <h2>Deleted Tasks</h2>
+        {deleted.map((element) => {
+            return <h2>{element.task}</h2>;
+        })}
+      </div>
+    );
   }
 }
 
