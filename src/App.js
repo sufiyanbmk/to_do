@@ -4,6 +4,15 @@ function App() {
   const [toDos, setTodos] = useState([]);
   const [task, setTask] = useState("");
   const [deleted, setDeleted] = useState([]);
+  function validate(value){
+    if(value.length>0){
+      setTodos([...toDos, { id: Date.now(), task:value, status: false }])
+      setTask('')
+    }
+    else{
+      alert('Please enter a value')
+    }
+  }
 
   return (
     <div className="app">
@@ -23,7 +32,7 @@ function App() {
         />
         <i
           onClick={() =>
-            setTodos([...toDos, { id: Date.now(), task, status: false }])
+            validate(task)
           }
           className="fas fa-plus"
         ></i>
