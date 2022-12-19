@@ -1,16 +1,25 @@
 import "./App.css";
 import { useState } from "react";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal)
+
 function App() {
   const [toDos, setTodos] = useState([]);
   const [task, setTask] = useState("");
   const [deleted, setDeleted] = useState([]);
+
   function validate(value){
     if(value.length>0){
       setTodos([...toDos, { id: Date.now(), task:value, status: false }])
       setTask('')
     }
     else{
-      alert('Please enter a value')
+      MySwal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter a value!',
+      })
     }
   }
 
